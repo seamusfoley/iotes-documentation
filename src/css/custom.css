@@ -1,0 +1,215 @@
+/* stylelint-disable docusaurus/copyright-header */
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #e4b800;
+  --ifm-color-primary-dark: #cda600;
+  --ifm-color-primary-darker: #c29c00;
+  --ifm-color-primary-darkest: #a08100;
+  --ifm-color-primary-light: #fbca00;
+  --ifm-color-primary-lighter: #ffcf07;
+  --ifm-color-primary-lightest: #ffd629;
+  --ifm-code-font-size: 95%;
+  --ifm-footer-background-color: #222;
+}
+
+html[data-theme='dark'] {
+  --ifm-color-emphasis-0: var(--ifm-color-gray-1000);
+  --ifm-color-emphasis-100: var(--ifm-color-gray-900);
+  --ifm-color-emphasis-200: var(--ifm-color-gray-800);
+  --ifm-color-emphasis-300: var(--ifm-color-gray-700);
+  --ifm-color-emphasis-400: var(--ifm-color-gray-600);
+  --ifm-color-emphasis-500: var(--ifm-color-gray-500);
+  --ifm-color-emphasis-600: var(--ifm-color-gray-400);
+  --ifm-color-emphasis-700: var(--ifm-color-gray-300);
+  --ifm-color-emphasis-800: var(--ifm-color-gray-200);
+  --ifm-color-emphasis-900: var(--ifm-color-gray-100);
+  --ifm-color-emphasis-1000: var(--ifm-color-gray-0);
+  --ifm-background-color: #18191a;
+  --ifm-background-surface-color: #18191a;
+  --ifm-hover-overlay: rgba(255, 255, 255, 0.05);
+  --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg alt="Arrow" xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.6)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
+  --ifm-color-content-secondary: rgba(255, 255, 255, 1);
+}
+
+.navbar {
+  border-bottom: var(--ifm-contents-border-color) 1px solid;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgb(72, 77, 91);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap');
+
+body {
+  font-family: 'Barlow', sans-serif;
+}
+
+.footer.footer--dark {
+  --ifm-footer-background-color: #111;
+}
+
+
+.underDevelopment {
+  background-color: #E4B800;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+}
+
+.nav-footer {
+  background-color: #111;
+}
+
+.blockImage {
+  max-width: 60px !important;
+}
+
+.toc .toggleNav .navGroup .navGroupCategoryTitle {
+  color: inherit;
+  color: white;
+}
+
+.toc .toggleNav ul li a {
+  color: #aaa
+}
+
+.toc .toggleNav ul li a:hover {
+  color: #fff
+}
+
+.onPageNav a {
+  color: #aaa;
+}
+
+.onPageNav a:hover {
+  color: #fff;
+}
+
+.onPageNav .toc-headings > li > a.active {
+  color: #E4B800;
+}
+
+.toc .toggleNav ul li.navListItemActive a {
+  color: #E4B800
+}
+
+.productShowcaseSection h2 {
+  color: inherit
+}
+
+.projectTitle {
+  color: white
+}
+
+.darkBackground {
+  background-color: #252525;
+}
+
+.lightBackground {
+  color: #303030
+}
+
+.fixedHeaderContainer {
+  box-shadow: 0px 0px 20px #1d1d1d;
+}
+
+.fixedHeaderContainer header img {
+  height: 70%;
+}
+
+.projectTitle > small {
+  margin: 1.0em 0em;
+}
+
+.nav-footer .iotes {
+  display: block;
+  margin: 1em auto;
+  opacity: 0.8;
+  width: 170px;
+}
+
+.button {
+  color: inherit;
+  border: 1px var(--ifm-navbar-link-color) solid
+}
+
+
+a {
+  color: inherit
+}
+
+.hash-link .hash-link-icon {
+  fill: #aaa
+}
+
+.hash-link .hash-link-icon:hover {
+  fill: white
+}
+
+.projectLogo {
+  position: static !important;
+  justify-content: center !important;
+  padding-bottom: 1em !important;
+  padding-top: 1em !important;
+}
+
+.projectLogo img {
+  max-height: 100px !important;
+}
+
+.homeContainer {
+  background-color: #252525;
+}
+
+.homeContainer .homeWrapper {
+  padding-bottom: 3em;
+  padding-top: 3em;
+}
+
+.mainContainer {
+  padding: 0;
+}
+
+.docsContainer {
+  padding-top: 2em;
+}
+
+
+a:hover {
+  color: #E4B800
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+
+}
+
+@media only screen and (max-width: 1023px) {
+
+}
+
+@media only screen and (min-width: 1400px) {
+
+}
+
+@media only screen and (min-width: 1200px){
+ 
+}
+
+@media only screen and (min-width: 1500px) {
+
+}
