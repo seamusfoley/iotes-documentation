@@ -18,19 +18,34 @@ const max = (arr: CollectiveData[], fn: (x: any) => number) => Math.max(...arr.m
 const extent = (arr: CollectiveData[], fn: (x: any) => number) => [min(arr, fn), max(arr, fn)]
 
 type Props = {
-  width: number,
-  height: number,
   data: CollectiveData[]
   margin?: {left: number, right: number, top: number, bottom: number }
 }
 
 const Area: React.FC<Props> = (props) => {
   const {
-    width,
-    height,
-    margin = { left: 0, right: 0, top: 0, bottom: 0 },
     data
   } = props;
+
+  const [width, setWidth] = useState(0)
+  const [height, setHeight] = useState(0)
+  const [top, setTop] = useState(0)
+
+  const margin = { left: 0, right: 0, top: 0, bottom: 0 }
+
+  const handleResize = () => {
+    setWidth(ref.current.parentElement.getBoundingClientRect().width)
+    setHeight(ref.current.parentElement.getBoundingClientRect().height)
+    setTop(ref.current.parentElement.getBoundingClientRect().top)
+  }
+
+  useEffect(() => {
+    window.onload = handleResize
+
+    window.addEventListener('resize', () => {
+      handleResize()
+    })
+  }, [])
 
   const lpx = useRef<number>(0)
   const ref = useRef<SVGSVGElement>(null)
@@ -67,7 +82,7 @@ const Area: React.FC<Props> = (props) => {
 
   const handleTooltip = (x: number)  => {
     const bounds = ref.current?.getBoundingClientRect()
-    const x0 = xScale.invert((bounds!.width) - (bounds!.width * 0.2))
+    const x0 = xScale.invert((bounds!.width) - (bounds!.width * 0.0))
     const index = bisectDate(data, x0, 1)
     const d0 = data[index - 1]
     const d1 = data[index]
@@ -81,7 +96,7 @@ const Area: React.FC<Props> = (props) => {
     setTooltip({
       isVisible: true,
       data: d,
-      left: (bounds!.width) - (bounds!.width * 0.2),
+      left: xMax,
       topY: yScale(d.y),
       topX: yScale(d.x)
     });
@@ -92,24 +107,15 @@ const Area: React.FC<Props> = (props) => {
   }, [data])
 
   return (
-    <div>
-        <svg ref={ref} width={width} height={height} overflow={'visible'}>
-          <rect x={0} y={0} width={width} height={height} fillOpacity={0} rx={0} />
+    <>
+        <svg ref={ref} width={'100%'} height={'100%'} overflow={'visible'}>
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#E4B800" stopOpacity={1} />
               <stop offset="100%" stopColor="#E4B800" stopOpacity={0.6} />
             </linearGradient>
           </defs>
-          <GridRows
-            lineStyle={{ pointerEvents: 'none' }}
-            scale={yScale}
-            width={xMax}
-            strokeDasharray="2,2"
-            stroke="rgba(255,255,255,0.2)"
-          />
           <AxisLeft
-            left={0}
             scale={yScale}
             numTicks={10}
             labelProps={{
@@ -129,6 +135,14 @@ const Area: React.FC<Props> = (props) => {
               dy: '0.25em'
             })}
           />
+          <GridRows
+            lineStyle={{ pointerEvents: 'none' }}
+            scale={yScale}
+            width={xMax}
+            strokeDasharray="2,2"
+            stroke="rgba(255,255,255,0.2)"
+          />
+
            <LinePath
             data={data}
             x={d => xScale(xValue(d))}
@@ -191,6 +205,7 @@ const Area: React.FC<Props> = (props) => {
                 to={{ x: tooltip.left, y: yMax }}
                 stroke="white"
                 strokeWidth={1}
+                strokeOpacity={0.2}
                 style={{ pointerEvents: 'none' }}
                 strokeDasharray="2,2"
               />
@@ -233,7 +248,7 @@ const Area: React.FC<Props> = (props) => {
         {tooltip.isVisible && (
           <div>
             <Tooltip
-              top={( - 12) + bounds?.top! || 0}
+              top={top}
               left={(tooltip.left + 12) + bounds?.left! || 0}
               style={{
                 backgroundColor: '#C7007A',
@@ -243,7 +258,7 @@ const Area: React.FC<Props> = (props) => {
               {`y: ${Math.round(tooltip.data.y)}`}
             </Tooltip>
             <Tooltip
-              top={( - 12) + bounds?.top! || 0}
+              top={top}
               left={(tooltip.left - 56) + bounds?.left! || 0}
               style={{
                 backgroundColor: '#E4B800',
@@ -253,7 +268,7 @@ const Area: React.FC<Props> = (props) => {
               {`x: ${Math.round(tooltip.data.x)}`}
             </Tooltip>
             <Tooltip
-              top={(yMax - 14) + ref.current!.getBoundingClientRect().top}
+              top={yScale(-300)}
               left={tooltip.left + ref.current!.getBoundingClientRect().left}
               style={{
                 backgroundColor: 'black',
@@ -265,7 +280,7 @@ const Area: React.FC<Props> = (props) => {
             </Tooltip>
           </div>
         )}
-      </div>
+      </>
   )
 }
 

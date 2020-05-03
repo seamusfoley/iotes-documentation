@@ -3,23 +3,21 @@ import { Collective, Graph } from '../components'
 import { CollectiveData } from '../types'
 import Layout from '@theme/Layout'
 
-const Example = () => {
+export const Example = () => {
   const [data, setData] = useState<CollectiveData[]>([
     { x: 0, y: 0, yv: 0, xv: 0, '@@timestamp': Date.now() }
   ])  
 
   return (
-    <Layout title="Hello">
       <div style={{ 
         display: 'flex', 
-        height: '100vh', 
-        flexDirection: 'column', 
-        justifyContent: 'center',
+        width: '100%',
+        height: '400px',
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
         alignItems: 'center'
       }} >
-        <div  style={{width: '100%', height:'10%', zIndex: 2}} />
-        <Graph width={700} height={400} data={data} />
-        <div style={{height: '60%', width:'30%', margin: '2em 0', zIndex: 1}} >
+          <div style={{height:'100%', width:'30%', margin: '0 50px 0 0', zIndex: 1}} >
           <Collective dataFramePeriod={100} onDataFrame={(d) => {
             const scaledData = {
               ...d,
@@ -32,9 +30,11 @@ const Example = () => {
             setData([...data, scaledData].slice(-100))
           }}/>
         </div>
-        <div style={{width: '100%', height:'10%'}} />
+        <div style={{height:'100%', width:'70%', zIndex: 1}} >
+          <Graph data={data} />
+        </div>
+    
       </div>
-    </Layout>
   )
 }
 export default Example;
