@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { Collective, Graph } from '../components' 
 import { CollectiveData } from '../types'
-import Layout from '@theme/Layout'
 
 export const Example = () => {
   const [data, setData] = useState<CollectiveData[]>([
@@ -9,15 +8,14 @@ export const Example = () => {
   ])  
 
   return (
-      <div style={{ 
-        display: 'flex', 
-        width: '100%',
-        height: '400px',
-        flexDirection: 'row', 
+      <div 
+      className={'flexLayout'}
+      style={{  
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        position:'relative',
       }} >
-          <div style={{height:'100%', width:'30%', margin: '0 50px 0 0', zIndex: 1}} >
+          <div style={{height:'100%', width: '100%', zIndex: 1}} >
           <Collective dataFramePeriod={100} onDataFrame={(d) => {
             const scaledData = {
               ...d,
@@ -30,7 +28,7 @@ export const Example = () => {
             setData([...data, scaledData].slice(-100))
           }}/>
         </div>
-        <div style={{height:'100%', width:'70%', zIndex: 1}} >
+        <div style={{height:'100%', width: '100%', zIndex: 1, position: 'relative'}} >
           <Graph data={data} />
         </div>
     

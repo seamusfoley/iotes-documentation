@@ -4,7 +4,7 @@ import { LinePath, Line, Bar } from '@vx/shape'
 import { curveMonotoneX } from '@vx/curve'
 import { GridRows } from '@vx/grid'
 import { scaleTime, scaleLinear } from '@vx/scale'
-import { Tooltip } from '@vx/tooltip'
+import { Tooltip, TooltipWithBounds } from '@vx/tooltip'
 import { localPoint } from '@vx/event'
 import { bisector } from 'd3-array'
 import { timeFormat } from 'd3-time-format'
@@ -29,27 +29,27 @@ const Area: React.FC<Props> = (props) => {
 
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
-  const [top, setTop] = useState(0)
-
+  
   const margin = { left: 0, right: 0, top: 0, bottom: 0 }
 
   const handleResize = () => {
-    setWidth(ref.current.parentElement.getBoundingClientRect().width)
-    setHeight(ref.current.parentElement.getBoundingClientRect().height)
-    setTop(ref.current.parentElement.getBoundingClientRect().top)
+    setWidth(ref.current?.parentElement.getBoundingClientRect().width || 0)
+    setHeight(ref.current?.parentElement.getBoundingClientRect().height || 0)
   }
 
   useEffect(() => {
     window.onload = handleResize
 
-    window.addEventListener('resize', () => {
+    const listener = window.addEventListener('resize', () => {
       handleResize()
     })
+
+    return window.removeEventListener('resize', () => listener)
   }, [])
 
   const lpx = useRef<number>(0)
   const ref = useRef<SVGSVGElement>(null)
-  const bounds = ref.current?.getBoundingClientRect()
+  const tooltipRef = useRef<SVGLineElement>(null)
 
   const [tooltip, setTooltip] = useState({
     isVisible: false,
@@ -108,7 +108,7 @@ const Area: React.FC<Props> = (props) => {
 
   return (
     <>
-        <svg ref={ref} width={'100%'} height={'100%'} overflow={'visible'}>
+        <svg ref={ref} width={'100%'} height={'100%'} overflow={'visible'} style={{position: 'relative'}}>
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#E4B800" stopOpacity={1} />
@@ -199,7 +199,7 @@ const Area: React.FC<Props> = (props) => {
             })}
           />
           {tooltip.isVisible && (
-            <g>
+            <g ref={tooltipRef}>
               <Line
                 from={{ x: tooltip.left, y: 0 }}
                 to={{ x: tooltip.left, y: yMax }}
@@ -246,39 +246,42 @@ const Area: React.FC<Props> = (props) => {
           )}
         </svg>
         {tooltip.isVisible && (
-          <div>
+          <>
             <Tooltip
-              top={top}
-              left={(tooltip.left + 12) + bounds?.left! || 0}
+              top={0}
+              left={width - 75}
               style={{
                 backgroundColor: '#C7007A',
-                color: 'black'
+                color: 'black',
+                whiteSpace: 'nowrap',
               }}
             >
               {`y: ${Math.round(tooltip.data.y)}`}
             </Tooltip>
             <Tooltip
-              top={top}
-              left={(tooltip.left - 56) + bounds?.left! || 0}
+              top={40}
+              left={width - 75}
               style={{
                 backgroundColor: '#E4B800',
-                color: 'black'
+                color: 'black',
+                whiteSpace: 'nowrap',
               }}
             >
               {`x: ${Math.round(tooltip.data.x)}`}
             </Tooltip>
             <Tooltip
-              top={yScale(-300)}
-              left={tooltip.left + ref.current!.getBoundingClientRect().left}
+              top={height}
+              left={ width - 0 }
               style={{
                 backgroundColor: 'black',
                 color: 'white',
-                transform: 'translateX(-50%)'
+                whiteSpace: 'nowrap',
+                transform: 'translateX(-100%)'
               }}
             >
               {formatDate(xValue(tooltip.data))}
             </Tooltip>
-          </div>
+          </>
         )}
       </>
   )

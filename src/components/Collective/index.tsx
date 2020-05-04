@@ -58,7 +58,7 @@ export const Collective: React.FC<Props> = (props) => {
   const [pos, setPos] = useState({r: 1, cx: 1, cy:1})
   const [bounding, setBounding] = useState({left: 0, top:0})
   const [collective, setCollective] = useState({x:0, y:0})
-  const [isEditing, setIsEditing] = useState(false)
+  const isEditing = useRef(false)
   const [updateReady, setUpdateReady] = useState(0)
 
   const collectiveSim = useRef<Omit<CollectiveData, '@@timestamp'>>({x:0, y:0, xv:0, yv:0})
@@ -68,7 +68,7 @@ export const Collective: React.FC<Props> = (props) => {
   const animRequest = useRef<number>(0)
 
   const handleCollectiveMove = (event: React.MouseEvent | React.TouchEvent) => {
-    if (!isEditing) {
+    if (!isEditing.current) {
       userForce.current = {
         x: 0, 
         y: 0, 
@@ -168,11 +168,18 @@ export const Collective: React.FC<Props> = (props) => {
   }
 
   const handleFinishEditing = () => {
-    setIsEditing(false)
+    isEditing.current = false
     userForce.current = {x:0, y:0}
   }
 
   useEventListener('mousemove', handleCollectiveMove)
+  useEventListener('touchmove', handleCollectiveMove)
+
+  useEffect(()=> {
+    window.addEventListener('touchmove', (e) => {
+      if (isEditing.current) e.preventDefault()
+    }, { passive: false })
+  }, [])
 
   useEffect(() => {
     onDataFrame({
@@ -222,7 +229,7 @@ export const Collective: React.FC<Props> = (props) => {
           strokeOpacity={1.0}
           fillOpacity={0}
         />
-        {isEditing ? <circle 
+        {isEditing.current ? <circle 
           cx={pos.cx + (collective.x * 2.5)} 
           cy={pos.cy + (collective.y * 2.5)} 
           r={64} 
@@ -231,11 +238,12 @@ export const Collective: React.FC<Props> = (props) => {
           strokeOpacity={0.66}
           fillOpacity={0}
           onMouseDown={(event) => { 
-            event.preventDefault()
-            setIsEditing(true) }}
+            // event.preventDefault()
+            isEditing.current = true 
+          }}
           onTouchStart={(event) => { 
-            event.preventDefault()
-            setIsEditing(true) 
+            // event.preventDefault()
+            isEditing.current = true 
           }}
         /> : null}
         <circle 
@@ -246,8 +254,14 @@ export const Collective: React.FC<Props> = (props) => {
           strokeWidth={2}
           fillOpacity={0.2}
           fill='#E4B800'
-          onMouseDown={() => { setIsEditing(true) }}
-          onTouchStart={() => { setIsEditing(true) }}
+          onMouseDown={() => { 
+            // event.preventDefault()
+            isEditing.current = true  
+          }}
+          onTouchStart={(event) => { 
+            // event.preventDefault()
+            isEditing.current = true
+          }}
           />
       </ svg>
   )

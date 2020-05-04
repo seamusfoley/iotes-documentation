@@ -186,6 +186,24 @@ a {
   padding-top: 2em;
 }
 
+.flexLayout {
+  flex-direction: row;
+  display: flex;
+  height: 50vh;
+  width: 100%;
+  margin: 1em 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .flexLayout {
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    width: 97%;
+    margin: 0 4em 0em 1em;
+  }
+}
+
 
 a:hover {
   color: #E4B800
