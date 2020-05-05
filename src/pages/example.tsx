@@ -15,7 +15,7 @@ export const Example = () => {
         alignItems: 'center',
         position:'relative',
       }} >
-          <div style={{height:'100%', width: '100%', zIndex: 1}} >
+          <div style={{height:'100%', width: '100%', zIndex: 1, margin: '0 2em 0 0'}} >
           <Collective dataFramePeriod={100} onDataFrame={(d) => {
             const scaledData = {
               ...d,

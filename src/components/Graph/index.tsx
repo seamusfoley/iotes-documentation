@@ -10,6 +10,7 @@ import { bisector } from 'd3-array'
 import { timeFormat } from 'd3-time-format'
 import { AxisLeft } from '@vx/axis'
 import  { CollectiveData } from '../../types'
+import { useEventListener } from '../../utils'
 
 // util
 const formatDate = timeFormat("%H:%M:%S  %L");
@@ -29,6 +30,10 @@ const Area: React.FC<Props> = (props) => {
 
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
+
+  const lpx = useRef<number>(0)
+  const ref = useRef<SVGSVGElement>(null)
+  const tooltipRef = useRef<SVGLineElement>(null)
   
   const margin = { left: 0, right: 0, top: 0, bottom: 0 }
 
@@ -38,18 +43,10 @@ const Area: React.FC<Props> = (props) => {
   }
 
   useEffect(() => {
-    window.onload = handleResize
+    handleResize()
+  }, [ref.current?.parentElement])
 
-    const listener = window.addEventListener('resize', () => {
-      handleResize()
-    })
-
-    return window.removeEventListener('resize', () => listener)
-  }, [])
-
-  const lpx = useRef<number>(0)
-  const ref = useRef<SVGSVGElement>(null)
-  const tooltipRef = useRef<SVGLineElement>(null)
+  useEventListener('resize', handleResize)
 
   const [tooltip, setTooltip] = useState({
     isVisible: false,
@@ -116,6 +113,9 @@ const Area: React.FC<Props> = (props) => {
             </linearGradient>
           </defs>
           <AxisLeft
+            axisLineClassName={'graph'}
+            tickClassName={'graph'}
+            labelClassName={'graph'}
             scale={yScale}
             numTicks={10}
             labelProps={{
@@ -124,10 +124,7 @@ const Area: React.FC<Props> = (props) => {
               fontSize: 12,
               fontFamily: 'Arial'
             }}
-            stroke="#1b1a1e"
-            tickStroke="#555"
             tickLabelProps={(value, index) => ({
-              fill: '#aaa',
               textAnchor: 'end',
               fontSize: 10,
               fontFamily: 'Arial',
@@ -136,11 +133,12 @@ const Area: React.FC<Props> = (props) => {
             })}
           />
           <GridRows
+            className={'graph'}
             lineStyle={{ pointerEvents: 'none' }}
             scale={yScale}
             width={xMax}
+            strokeWidth={1}
             strokeDasharray="2,2"
-            stroke="rgba(255,255,255,0.2)"
           />
 
            <LinePath
@@ -201,11 +199,10 @@ const Area: React.FC<Props> = (props) => {
           {tooltip.isVisible && (
             <g ref={tooltipRef}>
               <Line
+                className={'graph'}
                 from={{ x: tooltip.left, y: 0 }}
                 to={{ x: tooltip.left, y: yMax }}
-                stroke="white"
                 strokeWidth={1}
-                strokeOpacity={0.2}
                 style={{ pointerEvents: 'none' }}
                 strokeDasharray="2,2"
               />

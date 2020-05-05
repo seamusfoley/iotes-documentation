@@ -1,51 +1,18 @@
 
 import  React, {useState, useRef, useEffect} from 'react'
 import { CollectiveData } from '../../types'
+import { useEventListener } from '../../utils'
+import classnames from 'classnames'
 
 type Props = {
   onDataFrame?: (data: CollectiveData) => void
   dataFramePeriod?: number
 }
 
-type UseEventListener = <E>(
-  eventName: string, 
-  handler: (event: E) => void, 
-  element?: HTMLElement | SVGElement | globalThis.Window | globalThis.Document
-) => void
-
-const useEventListener: UseEventListener = (
-    eventName,
-    handler,
-    element = window
-) => { 
-  const savedHandler = useRef<(event: any) => void>();
-
-  useEffect(() => {
-    savedHandler.current = handler;
-  }, [handler]);
-
-  useEffect(
-    () => {
-      const isSupported = element && element.addEventListener;
-      if (!isSupported) return;
-  
-      const eventListener = (event: Event) => savedHandler.current!(event);
-      
-      element.addEventListener(eventName, eventListener);
-
-      return () => {
-        element.removeEventListener(eventName, eventListener);
-      };
-    },
-    [eventName, element]
-  )
-}
-
 type Point = {
   x: number,
   y: number
 }
-
 
 const getDistanceFromCentre = (point: Point): number => Math.sqrt(Math.abs(Math.pow(point.x,2)) + Math.abs(Math.pow(point.y,2)))
 
@@ -61,6 +28,7 @@ export const Collective: React.FC<Props> = (props) => {
   const isEditing = useRef(false)
   const [updateReady, setUpdateReady] = useState(0)
 
+  const showHint  = useRef<boolean>(true)
   const collectiveSim = useRef<Omit<CollectiveData, '@@timestamp'>>({x:0, y:0, xv:0, yv:0})
   const userForce = useRef({x:0, y:0})
 
@@ -76,11 +44,14 @@ export const Collective: React.FC<Props> = (props) => {
       return
     }
 
+    event.preventDefault()
+    document.body.classList.add('noselect')
+
     let pointer = [0,0]
     if('touches' in event) {
-      pointer = [event.touches[0].clientX, event.touches[0].clientY]
+      pointer = [event.touches[0].pageX, event.touches[0].pageY]
     } else {
-      pointer = [event.clientX, event.clientY]
+      pointer = [event.pageX, event.pageY]
     }
 
     const collectiveValue = {
@@ -172,34 +143,36 @@ export const Collective: React.FC<Props> = (props) => {
     userForce.current = {x:0, y:0}
   }
 
-  useEventListener('mousemove', handleCollectiveMove)
-  useEventListener('touchmove', handleCollectiveMove)
+  const handleMove = (e) => {
+    if (isEditing.current) {
+      e.preventDefault()
+      document.body.classList.add('noselect')
+    }
+  }
 
-  useEffect(()=> {
-    window.addEventListener('touchmove', (e) => {
-      if (isEditing.current) e.preventDefault()
-    }, { passive: false })
-  }, [])
+  useEventListener('mousemove', handleCollectiveMove, undefined, {passive: false})
+  useEventListener('touchmove', handleCollectiveMove, undefined, {passive: false})
+  useEventListener('resize', handleResize)
+  useEventListener('mouseup', handleFinishEditing)
+  useEventListener('touchend', handleFinishEditing)
+
 
   useEffect(() => {
     onDataFrame({
       '@@timestamp': Date.now(), 
       ...collectiveSim.current,
       x: collectiveSim.current.x / pos.r || 0,
-      y: collectiveSim.current.y / pos.r || 0
+      y: (collectiveSim.current.y / pos.r) * -1 || 0
    })
 
-    setTimeout(() => setUpdateReady(Date.now()), dataFramePeriod)
+    const timeout = setTimeout(() => setUpdateReady(Date.now()), dataFramePeriod)
+
+    return () => { clearTimeout(timeout) }
   }, [ updateReady ])
 
   useEffect(() => {
     handleResize()
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('mouseup', handleFinishEditing);
-    window.addEventListener('touchend', handleFinishEditing);
-
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [ref.current])
 
   useEffect(() => {
     animRequest.current = requestAnimationFrame(animation);
@@ -214,6 +187,22 @@ export const Collective: React.FC<Props> = (props) => {
               <stop offset="100%" style={{stopColor: '#272727', stopOpacity:1 }} />
             </radialGradient>
         </defs>
+        <line
+          className={'collective'}
+          x1={pos.cx + pos.r} 
+          y1={'50%'} 
+          x2={pos.cx - pos.r}
+          y2={'50%'} 
+          fillOpacity={0}
+        />
+        <line
+          className={classnames('collective', 'y')}
+          x1={'50%'} 
+          y1={pos.cy + pos.r} 
+          x2={'50%'} 
+          y2={pos.cy - pos.r}
+          fillOpacity={0}
+        />
         <circle 
           cx={pos.cx} 
           cy={pos.cy} 
@@ -221,11 +210,11 @@ export const Collective: React.FC<Props> = (props) => {
           fillOpacity={0}
         />
         <circle 
+          className={'collective'}
           cx={pos.cx} 
           cy={pos.cy} 
           r={Math.abs(pos.r - 2)} 
-          strokeWidth={4}
-          stroke='#999'
+          strokeWidth={1}
           strokeOpacity={1.0}
           fillOpacity={0}
         />
@@ -233,7 +222,7 @@ export const Collective: React.FC<Props> = (props) => {
           cx={pos.cx + (collective.x * 2.5)} 
           cy={pos.cy + (collective.y * 2.5)} 
           r={64} 
-          stroke='#E4B800' 
+          stroke='#CCC' 
           strokeWidth={2}
           strokeOpacity={0.66}
           fillOpacity={0}
@@ -246,23 +235,32 @@ export const Collective: React.FC<Props> = (props) => {
             isEditing.current = true 
           }}
         /> : null}
-        <circle 
+        <circle
+          style={{cursor: 'pointer'}}
           cx={pos.cx + collective.x} 
           cy={pos.cy + collective.y} 
           r={10} 
-          stroke='#E4B800' 
+          stroke='#CCC' 
           strokeWidth={2}
           fillOpacity={0.2}
-          fill='#E4B800'
+          fill='#CCC' 
           onMouseDown={() => { 
-            // event.preventDefault()
+            showHint.current = false
             isEditing.current = true  
           }}
           onTouchStart={(event) => { 
-            // event.preventDefault()
+            showHint.current = false
             isEditing.current = true
           }}
           />
+          { showHint.current ? <text 
+            x={ pos.cx + collective.x - 30 } 
+            y={ pos.cy + collective.y + 40 }
+           
+            fill={'#ccc'}
+          > 
+            Drag Me!
+          </text> : null }
       </ svg>
   )
 }
