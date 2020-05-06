@@ -6,7 +6,8 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "deploy": "docusaurus deploy",
+    "serve": "serve ./build"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.54",
@@ -19,6 +20,8 @@
     "@vx/shape": "0.0.195",
     "@vx/tooltip": "0.0.195",
     "classnames": "^2.2.6",
+    "iotes": "^0.1.31",
+    "iotes-strategy-mqtt": "^0.1.36",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },

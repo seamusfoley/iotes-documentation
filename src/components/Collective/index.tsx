@@ -112,7 +112,9 @@ export const Collective: React.FC<Props> = (props) => {
       y: collectiveSim.current.y 
     })
    
-    animRequest.current = requestAnimationFrame((nextTime) => animation(nextTime, time));
+    if (window !== undefined){
+      animRequest.current = requestAnimationFrame((nextTime) => animation(nextTime, time));
+    }
   }
 
   const handleResize = () => {
@@ -156,7 +158,6 @@ export const Collective: React.FC<Props> = (props) => {
   useEventListener('mouseup', handleFinishEditing)
   useEventListener('touchend', handleFinishEditing)
 
-
   useEffect(() => {
     onDataFrame({
       '@@timestamp': Date.now(), 
@@ -175,8 +176,10 @@ export const Collective: React.FC<Props> = (props) => {
   }, [ref.current])
 
   useEffect(() => {
-    animRequest.current = requestAnimationFrame(animation);
-    return () => cancelAnimationFrame(animRequest.current);
+    if (window !== undefined ){
+      animRequest.current = requestAnimationFrame(animation);
+      return () => cancelAnimationFrame(animRequest.current);
+    }
   }, [])
 
   return (

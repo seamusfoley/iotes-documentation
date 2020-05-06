@@ -28,6 +28,8 @@ const Area: React.FC<Props> = (props) => {
     data
   } = props;
 
+  if(typeof window === undefined) return <></>
+
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
 
@@ -69,7 +71,6 @@ const Area: React.FC<Props> = (props) => {
       range: [0, xMax],
       domain: extent(data, (d: CollectiveData) => Number(xValue(d)))
     })
-
 
   const yScale = scaleLinear({
     range: [yMax, 0],

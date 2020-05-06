@@ -7,12 +7,21 @@ type UseEventListener = <E>(
   options?: boolean | AddEventListenerOptions
 ) => void
 
+
+const maybeWindow = () => {
+  try {
+    return window
+  } catch {
+    return undefined
+  }
+}
+
 export const useEventListener: UseEventListener = (
     eventName,
     handler,
-    element = window,
+    element = maybeWindow(),
     options,
-) => { 
+) => {
   const savedHandler = useRef<(event: any) => void>();
 
   useEffect(() => {

@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   title: 'Iotes',
   tagline: 'An IOT adaptor for JavaScript',
@@ -6,6 +8,7 @@ module.exports = {
   favicon: 'img/iotes-favicon.png',
   organizationName: 'seamusfoley', // Usually your GitHub org/user name.
   projectName: 'iotes', // Usually your repo name.
+  plugins: [path.resolve(__dirname, 'src/plugins/mqttjs')],
   themeConfig: {
     prism: {
       theme: require('prism-react-renderer/themes/github'),
