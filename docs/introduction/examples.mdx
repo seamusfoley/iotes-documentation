@@ -5,10 +5,112 @@ title: Examples
 
 import { Example } from '../../src/pages/example'
 
-### Mqtt Example
+## Basic MQTT
 
-In this example the the graph maps the x and y movement of the collective control. The collective position are is via iotes over a public mqqt broker and received by the graph, which subscribes via iotes
+In this example the the graph maps the x and y movement of the collective control. The collective position are is via iotes over a public mqtt broker and received by the graph, which subscribes via Iotes
 
-
+### Example
 
 <Example />
+
+### Code
+
+This code is written with React using Iotes core for the purpose of a demonstration. The Iotes-React plugin provides 
+simpler access to Iotes for use in React and is recommended for use is react projects
+
+
+```jsx
+import { createIotes } from 'iotes'
+
+// This topology map creates one device called 'COLLECTIVE' which subscribes to the public 
+// mosquitto mqtt broker at test.mosquitto.org
+
+const topology = {
+  client: {
+    name: 'iotesExample'
+  },
+  hosts: [{ 
+    name: 'iotesExample', 
+    host: 'ws://test.mosquitto.org',
+    port: '8080' 
+  }],
+  devices: [{
+    hostName: 'iotesExample',
+    type: 'EXTERNAL_CHANNEL',
+    name: 'COLLECTIVE',
+  }],
+}
+
+export const Example = () => {
+
+  // The host and device variable are declared here 
+  // hold the data that is received from iotes
+  const [hostData, setHostData] = useState([])  
+  const [deviceData, setDeviceData] = useState([])
+
+  // Reference to the iotes instance
+  const iotes = useRef(null)
+
+  // References to track susription state
+  const isDeviceSubscribed = useRef(false)
+  const isHostSubscribed = useRef(flase)
+
+  // Create Iotes instance on component mount with mqtt strategy
+  // This will automatically intitiate a connection to the broker
+  useEffect(() => {
+    iotes.current = createIotes({
+      topology, 
+      strategy: mqttStrategy
+    })
+  }, [])
+
+  // Subscribe to Device stream
+  useEffect(() => {
+    // The subscription state is checked here because of the way React Hooks work. 
+    // This effect is required to run every time deviceData is
+    // updated but we never want more than one subscription
+    if (isDeviceSubscribed.current === false){
+      iotes.current.deviceSubscribe((state) => {
+        // Get the payload from the COLLECTIVE device name
+        const devicePayload = deviceState.COLLECTIVE.payload
+        // Create an array of maximum length of 100 
+        // with the new data as the last entry
+        const nextDeviceData = [ ...deviceData, devicePayload ].slice(-100)
+
+        setDeviceData(nextDeviceData)
+      }
+
+      isDeviceSubscribed.current = true
+    }
+  }, [deviceData, isDeviceSubscribed.current, iotes.current])
+
+  // Subscribe to Host stream,
+  // This is the same as the device subscription example
+  useEffect(() => {
+    if(!isHostSubscribed.current){
+      iotes.current.hostSubscribe((state) => {
+        setHostData(state['iotesExample'])
+      })
+    }
+  }, [hostData, isHostSubscribed.current, iotes.current ])
+
+  const handleDataFrame = (data) => {
+    if (!iotes.current) return
+    // Dispatch new data over mqtt
+    iotes.current.deviceDispatch(
+      createDeviceDispatchable('COLLECTIVE', 'UPDATE', data)
+    )
+  }
+
+  return (
+    <>
+      <h3>Host: {hostData.slice(-1)[0].type}</h3>
+      <Collective 
+        dataFramePeriod={150} 
+        onDataFrame={(data) => handleDataFrame(data)}
+      />
+      <Graph data={deviceData} />
+    <>
+  )
+}
+```

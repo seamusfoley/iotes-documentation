@@ -3,5 +3,105 @@ id: mqtt
 title: MQTT
 ---
 
-This is a link to [another document.](doc3.md)  
-This is a link to an [external page.](http://www.example.com)
+**The MQTT strategy gives iotes a way connect to and receive or dispatch data to an MQTT broker** 
+
+Mqtt is an accessible maturure and widely used IOT protocol. If you dont know which strategy to use, or you are getting started with IOT use this one.
+
+
+## Install
+
+```bash
+npm install iotes-strategy-mqtt
+```
+
+## Use
+
+```javascript
+import { createIotes } from 'iotes'
+import { mqttStrategy } from 'iotes-strategy-mqtt'
+
+const topology = {
+  // topology map
+}
+
+const iotes = createIotes({
+  topology, 
+  strategy: mqttStrategy 
+})
+```
+
+## About MQTT
+
+> Mqtt is a simple and lightweight messaging protocol, designed for constrained devices and low-bandwidth, high-latency or unreliable networks. It is designed to minimise network bandwidth and device resource requirements while attempting to ensure reliability, making it well suited to 'Internet of Things' connected devices, and for mobile applications where bandwidth and battery power are at a premium.
+
+*Edited from [mqtt.org](http://mqtt.org/)*
+
+MQTT works on a publish/subscribe (pub/sub) model. Devices can publish messages to a **topic**, and devices can **subscibe** to a **topic**. When a device publishes a message to a **topic** all devices subscribed to that **topic** receive the message
+
+All devices connect to a centralised **broker**. The broker receives the messages **published** to a **topic** and distributes the message to all devices **subscribed** to the **topic**
+
+## Iotes Mqtt Topology
+
+The iotes MQTT strategy uses [MQTT.js](https://github.com/mqttjs/MQTT.js) for mqtt connection
+
+### Hosts
+
+- ```name``` : Your name for the broker you want to connect to. This can be anything you want and is not related to broker settings
+
+- ```host``` : The address of the broker you wish to connect to. You **must** prefix this with the protcol which you wish to use. Generally from a browser this will be ```ws://``` or ```wss://``` as the browser will be able to use MQTT over websockets.
+
+- ```port``` : The port on the host that the broker uses. According to mqtt documentation this should be ```8883``` for mqtt over websockets but in practice is often some port in the ```8xxx``` range. Check you broker documentation to find out
+
+- ```strategyConfig```: *Optional* : You can use this to pass config information to mqtt.js. You can see the avliable options [here](https://github.com/mqttjs/MQTT.js#mqttclientstreambuilder-options)
+
+#### Example:
+
+```javascript
+const topology = {
+  // ...client
+  hosts:[{
+    name: 'myBroker', 
+    host:'ws://test.mosquitto.org', 
+    port: '8080', 
+    strategyConfig: {} 
+  }] 
+  // ...devices
+}
+```
+  
+### Devices
+
+- ```hostName```: The name of the host you want to connect this device to. This **must** match a name of one of your hosts from the ```host``` portion of your topology.
+
+- ```type```: The type of connection you wish to make. With iotes-MQTT you have two options.
+  
+  - ```APP_CHANNEL``` : With *APP_CHANNEL* message will be subscribed and dispatched to the broker on ```{client.name}/{device.name}```. If you have an app made up of multiple services or interfaces that need to communicate you can use this to prefix your topic 
+
+  - ```EXTERNAL_CHANNEL``` : With *EXTERNAL_CHANNEL* message will be subscribed and dispatched to the broker on ```{device.name}```. This is the way to subscribe to any given channel.
+
+- ```name``` : The name for the device. This will translate in MQTT to the **topic** which iotes subscribes and publishes on. This actual topic name will depend on whether the ```type``` you have chosen   
+
+
+#### Example:
+
+```javascript
+  const topology = {
+    // ...client
+    // ...hosts
+    devices: [{ 
+      hostName: 'myBroker',
+      type: 'APP_CHANNEL',
+      name: 'DEVICE'
+    }]
+  }  
+```
+
+
+
+
+
+
+
+
+
+

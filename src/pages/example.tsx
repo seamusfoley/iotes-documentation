@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Collective, Graph } from '../components' 
 import { createIotes, TopologyMap, Iotes, createDeviceDispatchable} from 'iotes'
 import { mqttStrategy } from 'iotes-strategy-mqtt'
-import * as buffer from 'buffer';
 
 const topology: TopologyMap<{}, any> = {
   hosts: [{ name: 'testapp/0', host: 'ws://test.mosquitto.org', port: '8080' }],
@@ -28,7 +27,7 @@ export const Example = () => {
     { x: 0, y: 0, yv: 0, xv: 0, '@@timestamp': Date.now() }
   ]) 
   
-  const [hostStatus, setHostStatus] = useState<string>('NOT CONNECTED')  
+  const [hostStatus, setHostStatus] = useState<any>({})  
 
   const iotes = useRef<Iotes>(null)
   const isDeviceSubscribed = useRef<boolean>(false)
@@ -61,20 +60,20 @@ export const Example = () => {
   useEffect(() => {
     if(!isHostSubscribed.current){
       iotes.current?.hostSubscribe((state) => {
-        setHostStatus(state['testapp/0'].type as string)
+        setHostStatus(state['testapp/0'])
       })
     }
-  }, [iotes.current, data, isHostSubscribed.current])
-
-  useEffect(() => {
-    // console.log(data)
-  }, [data])
-
+  }, [iotes.current, hostStatus, isHostSubscribed.current])
 
   return (
       <>
-        <h4 style={{display: 'inline-block'}}>Host: <span style={{color: 'yellow'}}>{hostStatus}</span></h4>
-        <h4> Device: </h4>
+        <div >
+          <h4 style={{margin: 0, padding: 0}}> Host: <span className={'primaryText'}>{hostStatus.type || ''}</span></h4>
+          <code style={{ fontSize: '0.7em'}}>{JSON.stringify({name: hostStatus.name, type: hostStatus.type })}</code>
+        </div>
+        <div>
+          <h4> Device: </h4>
+        </div>
         <div
         className={'example'}
         style={{  
@@ -83,28 +82,31 @@ export const Example = () => {
           position:'relative',
         }} >
             <div className={'exampleElement'} style={{zIndex: 1, margin: '0 2em 0 0'}} >
-            <Collective dataFramePeriod={150} onDataFrame={(d) => {
-              const scaledData = {
-                ...d,
-                x: (d.x * 100),
-                y: (d.y * 100),
-                xv: (d.xv / 10),
-                yv: (d.yv / 10)
-              }
-              if(iotes.current){
-                iotes.current.deviceDispatch(createDeviceDispatchable('ENCODER/1', 'MQTT', scaledData))
-              }
-            }}/>
+              <Collective dataFramePeriod={150} onDataFrame={(d) => {
+                const scaledData = {
+                  ...d,
+                  x: (d.x * 100),
+                  y: (d.y * 100),
+                  xv: (d.xv / 10),
+                  yv: (d.yv / 10)
+                }
+                if(iotes.current){
+                  iotes.current.deviceDispatch(createDeviceDispatchable('ENCODER/1', 'MQTT', scaledData))
+                }
+              }}/>
           </div>
           <div className={'exampleElement'} style={{zIndex: 1, position: 'relative'}} >
             <Graph data={data} />
           </div>
         </div>
-        <div style={{marginTop: '30px'}}>
-          <code style={{ fontSize: '0.7em', whiteSpace: 'nowrap'}}>{
+        <div style={{width: '100%', textOverflow: 'ellipsis', position: 'relative', top:'2em'}}>
+          <code style={{ fontSize: '0.7em'}}>{
             JSON.stringify(function(){
-              const {xv, yv, ...rest} = data.slice(-1)[0]
-              return rest
+              const d = data.slice(-1)[0]
+              return {
+                x: Math.round(d.x * 100)/100,
+                y: Math.round(d.x * 100)/100
+              }
             }())
           }
           </code>

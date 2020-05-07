@@ -3,5 +3,104 @@ id: phidget22
 title: Phidget
 ---
 
-This is a link to [another document.](doc3.md)  
-This is a link to an [external page.](http://www.example.com)
+**The Phidget strategy gives iotes a way connect to and receive or dispatch data to the series of phidget devices** 
+
+Phidget is a brand for USB Sensing and Control devices. They can be be seen as a closed source alternatives to Arduinos, that take care of a lot of the implementation details for you. Phidgets are a good choice for robust, quick and easy to use physical control devices if you don't mind paying a bit extra over Arduinos and aren't worried about power consumption.     
+
+## Install
+
+```bash
+npm install iotes-strategy-phidget22
+```
+
+## Use
+
+```javascript
+import { createIotes } from 'iotes'
+import { phidgetStrategy } from 'iotes-strategy-phidget'
+
+const topology = {
+  // topology map
+}
+
+const iotes = createIotes({
+  topology, 
+  strategy: phidgetStrategy 
+})
+```
+
+## About Phiget
+
+Phidgets are both physical devices and a protocol designed to make usb sensors and controllers easy and quick to use. They can be used for education, exhibitions and prototyping.
+
+In most languages phidget supports the phidget API directly communicates with a usb driver, in JavaScript however the apps send and receives messages from the app to a network server, which does the usb communication with the physical devices. Fortunatley the network server is pretty easy to set up either locally or on you local newtowork following this [documentation](https://www.phidgets.com/docs/Phidget_Network_Server#Javascript). Once up and running iotes-phidget makes it easy address the devices.
+
+Alternativley the phidget SBC (single board computer) is avaliable which acts an the network server and provides plug point to devices using Phidgets propietry VINT plugs       
+
+
+## Iotes Phidget Topology
+
+The iotes Phidget strategy uses [Phidget.js](https://github.com/mqttjs/Phidget.js) for Phidget connection
+
+### Hosts
+
+- ```name``` : Your name for the broker you want to connect to. This can be anything you want and is not related to broker settings
+
+- ```host``` : The address of the broker you wish to connect to. You **must** prefix this with the protcol which you wish to use. Generally from a browser this will be ```ws://``` or ```wss://``` as the browser will be able to use Phidget over websockets.
+
+- ```port``` : The port on the host that the broker uses. According to Phidget documentation this should be ```8883``` for Phidget over websockets but in practice is often some port in the ```8xxx``` range. Check you broker documentation to find out
+
+- ```strategyConfig```: *Optional* : You can use this to pass config information to Phidget.js. You can see the avliable options [here](https://github.com/mqttjs/Phidget.js#mqttclientstreambuilder-options)
+
+#### Example:
+
+```javascript
+const topology = {
+  // ...client
+  hosts:[{
+    name: 'myBroker', 
+    host:'ws://test.mosquitto.org', 
+    port: '8080', 
+    strategyConfig: {} 
+  }] 
+  // ...devices
+}
+```
+  
+### Devices
+
+- ```hostName```: The name of the host you want to connect this device to. This **must** match a name of one of your hosts from the ```host``` portion of your topology.
+
+- ```type```: The type of connection you wish to make. With iotes-Phidget you have two options.
+  
+  - ```APP_CHANNEL``` : With *APP_CHANNEL* message will be subscribed and dispatched to the broker on ```{client.name}/{device.name}```. If you have an app made up of multiple services or interfaces that need to communicate you can use this to prefix your topic 
+
+  - ```EXTERNAL_CHANNEL``` : With *EXTERNAL_CHANNEL* message will be subscribed and dispatched to the broker on ```{device.name}```. This is the way to subscribe to any given channel.
+
+- ```name``` : The name for the device. This will translate in Phidget to the **topic** which iotes subscribes and publishes on. This actual topic name will depend on whether the ```type``` you have chosen   
+
+
+#### Example:
+
+```javascript
+  const topology = {
+    // ...client
+    // ...hosts
+    devices: [{ 
+      hostName: 'myBroker',
+      type: 'APP_CHANNEL',
+      name: 'DEVICE'
+    }]
+  }  
+```
+
+
+
+
+
+
+
+
+
+
+

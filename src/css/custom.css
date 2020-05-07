@@ -7,13 +7,30 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #e4b800;
-  --ifm-color-primary-dark: #cda600;
-  --ifm-color-primary-darker: #c29c00;
-  --ifm-color-primary-darkest: #a08100;
-  --ifm-color-primary-light: #fbca00;
-  --ifm-color-primary-lighter: #ffcf07;
-  --ifm-color-primary-lightest: #ffd629;
+  --ifm-color-primary: #c7007a;
+  --ifm-color-primary-dark: #b3006e;
+  --ifm-color-primary-darker: #a90068;
+  --ifm-color-primary-darkest: #8b0055;
+  --ifm-color-primary-light: #db0086;
+  --ifm-color-primary-lighter: #e5008c;
+  --ifm-color-primary-lightest: #ff049e;
+  --ifm-color-secondary: #e4b800;
+  --ifm-color-secondary-dark: #cda600;
+  --ifm-color-secondary-darker: #c29c00;
+  --ifm-color-secondary-darkest: #a08100;
+  --ifm-color-secondary-light: #fbca00;
+  --ifm-color-secondary-lighter: #ffcf07;
+  --ifm-color-secondary-lightest: #ffd629;
+  --ifm-code-font-size: 95%;
+  --ifm-footer-background-color: #222;
+  --ifm-contents-border-color: #aaa;
+  --axis-color: #999;
+  --ifm-blockquote-color: black;
+  --ifm-strong-color: var(--ifm-color-primary);
+  --ifm-code-color: var(--ifm-color-primary)
+}
+
+html[data-theme='dark'] {
   --ifm-color-secondary: #c7007a;
   --ifm-color-secondary-dark: #b3006e;
   --ifm-color-secondary-darker: #a90068;
@@ -21,13 +38,15 @@
   --ifm-color-secondary-light: #db0086;
   --ifm-color-secondary-lighter: #e5008c;
   --ifm-color-secondary-lightest: #ff049e;
+  --ifm-color-primary: #e4b800;
+  --ifm-color-primary-dark: #cda600;
+  --ifm-color-primary-darker: #c29c00;
+  --ifm-color-primary-darkest: #a08100;
+  --ifm-color-primary-light: #fbca00;
+  --ifm-color-primary-lighter: #ffcf07;
+  --ifm-color-primary-lightest: #ffd629;
   --ifm-code-font-size: 95%;
-  --ifm-footer-background-color: #222;
-  --ifm-contents-border-color: #aaa;
-  --axis-color: #999;
-}
-
-html[data-theme='dark'] {
+  --ifm-blockquote-color: white;
   --ifm-color-emphasis-0: var(--ifm-color-gray-1000);
   --ifm-color-emphasis-100: var(--ifm-color-gray-900);
   --ifm-color-emphasis-200: var(--ifm-color-gray-800);
@@ -45,6 +64,11 @@ html[data-theme='dark'] {
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg alt="Arrow" xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.6)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
   --ifm-color-content-secondary: rgba(255, 255, 255, 1);
   --ifm-contents-border-color: #606770;
+  --ifm-code-background: var(--ifm-color-gray-800);
+}
+
+strong {
+  color: var(--ifm-strong-color);
 }
 
 .noselect {
@@ -56,6 +80,15 @@ html[data-theme='dark'] {
 .navbar {
   border-bottom: var(--ifm-contents-border-color) 1px solid;
 }
+
+.primaryText {
+  color: var(--ifm-color-primary)
+}
+
+.secondaryText {
+  color: var(--ifm-color-secondary)
+}
+
 
 .collective {
   stroke: var(--axis-color);

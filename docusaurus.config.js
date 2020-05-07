@@ -24,13 +24,19 @@ module.exports = {
       links: [
         {
           to: 'docs/introduction/getting-started', 
-          activeBasePath: 'intorduction', 
+          activeBasePath: 'introduction', 
           label: 'Getting Started',
           position: 'right'
         },
         {
           to: 'docs/introduction/examples', 
-          activeBasePath: 'intorduction',
+          activeBasePath: 'introduction',
+          label: 'Examples',
+          position: 'right'
+        },
+        {
+          to: 'docs/introduction/examples', 
+          activeBasePath: 'introduction',
           label: 'API',
           position: 'right'
         },
