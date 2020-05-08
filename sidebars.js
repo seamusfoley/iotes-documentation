@@ -9,7 +9,6 @@ module.exports = {
     ],
     Plugins: [
       "plugins/react-hooks", 
-      "plugins/redux-react-hooks"
     ],
     Strategies: [
       "strategies/mqtt", 
