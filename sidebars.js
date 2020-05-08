@@ -5,10 +5,11 @@ module.exports = {
       "introduction/installation", 
       "introduction/motivation",
       "introduction/core-concepts", 
-      "introduction/examples" 
+      "introduction/examples",
+      "introduction/what-is-this" 
     ],
     Plugins: [
-      "plugins/react-hooks", 
+      "plugins/react-hooks",
     ],
     Strategies: [
       "strategies/mqtt", 

@@ -3,16 +3,16 @@ id: core-concepts
 title: Core Concepts
 ---
 
-## Create Iotes
+## Iotes
 
 The ```createIotes``` method takes two arguements, a topology map and a strategy
 
 The topology map tells the strategy how to connect.
-The strategy handles all the asyncronous connection details for the protocol (inlcuding auto reconnection if required), the device creation and set up.
+The strategy handles all the asyncronous connection details for the protocol (including auto reconnection if required, the device creation and device set up.
 
 ## Iotes Core
 
-An iotes instance made by createIotes exposes four methods.
+An iotes instance made by ```createIotes``` exposes four methods.
 
 ```javascript
 hostSubscribe()
@@ -26,7 +26,7 @@ Subscribe methods subscribe to the event streams from the device or the host.
 
 Dispatch methods send messages to the device or the host.
 
-This library has been inspried heavily by (redux)[redux.js.org] (in fact at an early iteration it was a redux middleware), hence the use of ```subscribe``` and ```dispatch``` as opposed to pub/sub send/receive etc.
+This library has been inspried heavily by [redux](redux.js.org) (in fact an early iteration of iotes was written as a redux middleware), hence the use of ```subscribe``` and ```dispatch``` as opposed to pub/sub send/receive etc.
 
 ## Topology Map
 

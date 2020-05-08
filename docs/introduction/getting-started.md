@@ -10,7 +10,7 @@ It helps you write applications that connect to iot services, using a number of 
 
 You can use iotes core alone, or use it with [plugins](/docs/introduction/core-concepts#plugins) that provide bindings to popular libraries 
 
-This quick start is a basic example that uses the [strategy](/docs/introduction/core-concepts#strategies) to connect two devices to the [mosquitto](mosquitto.org) public mqtt broker.
+This quick start is a basic example that uses the [mqtt strategy](/docs/strategie/mqtt) to connect two devices to the [mosquitto](mosquitto.org) public mqtt broker.
 
 ## Quick Start
 

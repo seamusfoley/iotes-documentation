@@ -80,7 +80,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Seamus Foley and We the Curious`,
+      copyright: `Copyright © ${new Date().getFullYear()} Seamus Foley and wtc`,
     },
   },
   presets: [
