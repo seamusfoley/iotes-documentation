@@ -1,6 +1,4 @@
 const path = require('path')
-const nodeExternals = require('webpack-node-externals');
-
 
 const maybeMqttExternal = (predicate) => {
   if(predicate) return ({
