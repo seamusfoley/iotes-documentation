@@ -5,7 +5,12 @@ title: Phidget
 
 **The Phidget strategy gives iotes a way connect to and receive or dispatch data to the series of phidget devices** 
 
-Phidget is a brand for USB Sensing and Control devices. They can be be seen as a closed source alternatives to Arduinos, that take care of a lot of the implementation details for you. Phidgets are a good choice for robust, quick and easy to use physical control devices if you don't mind paying a bit extra over Arduinos and aren't worried about power consumption.     
+Phidget is a brand for USB Sensing and Control devices. They can be be seen as a closed source alternatives to Arduinos, that take care of a lot of the implementation details for you. Phidgets are a good choice for robust, quick and easy to use physical control devices if you don't mind paying a bit extra over Arduinos and aren't worried about power consumption. 
+
+
+:::caution Phidget Device Support
+At the moment we are only supporting Rotary Encoders and RFID readers with the phidget strategy. This is because that is the only hardware we've had around to play with. Adding new devices is relitavley easy, so if you have a physical phidget device you would like supported and wouldn't mind being a test case git in touch!  
+:::
 
 ## Install
 
@@ -29,7 +34,7 @@ const iotes = createIotes({
 })
 ```
 
-## About Phiget
+## About Phidget
 
 Phidgets are both physical devices and a protocol designed to make usb sensors and controllers easy and quick to use. They can be used for education, exhibitions and prototyping.
 

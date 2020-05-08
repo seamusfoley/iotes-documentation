@@ -25,7 +25,7 @@ module.exports = {
         {
           to: 'docs/introduction/getting-started', 
           activeBasePath: 'introduction', 
-          label: 'Getting Started',
+          label: 'Quick Start',
           position: 'right'
         },
         {
@@ -34,7 +34,7 @@ module.exports = {
           label: 'Examples',
           position: 'right'
         },
-        {
+        /*{
           to: 'docs/introduction/examples', 
           activeBasePath: 'introduction',
           label: 'API',
@@ -45,10 +45,11 @@ module.exports = {
           activeBasePath: 'introduction', 
           label: 'FAQ',
           position: 'right'
-        },
+        },*/
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
+
+          href: 'https://github.com/seamusfoley/iotes',
+          label: 'Github',
           position: 'right',
         },
       ],

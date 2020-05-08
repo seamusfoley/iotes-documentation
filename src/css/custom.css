@@ -27,7 +27,8 @@
   --axis-color: #999;
   --ifm-blockquote-color: black;
   --ifm-strong-color: var(--ifm-color-primary);
-  --ifm-code-color: var(--ifm-color-primary)
+  --ifm-code-color: var(--ifm-color-primary);
+  --logo-color: #e4b800;
 }
 
 html[data-theme='dark'] {
@@ -71,6 +72,10 @@ strong {
   color: var(--ifm-strong-color);
 }
 
+.navbar strong  {
+  color: var(--logo-color);
+}
+
 .noselect {
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -87,6 +92,10 @@ strong {
 
 .secondaryText {
   color: var(--ifm-color-secondary)
+}
+
+.markdown a {
+  text-decoration: underline;
 }
 
 

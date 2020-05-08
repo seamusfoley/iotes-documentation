@@ -96,6 +96,41 @@ const topology = {
   }  
 ```
 
+## Choosing a Broker
+
+If you're not familiar with MQTT there are options to get a broker working.
+
+- Public Brokers
+  
+  Public brokers are the quickest way to get started in development. They allow anyone to subscribe or dispatch to any topic. This is what we are using for the example [here](/docs/introduction/examples#basic-mqtt)
+
+  [broker.hivemq.com](broker.hivemq.com)
+
+  [test.mosquitto.org](test.mosquitto.org)
+
+- Node js Broker
+
+  Aedes allows you to set up you own broker as a node module.
+
+  [https://github.com/moscajs/aedes](https://github.com/moscajs/aedes)
+
+
+- Self Hosted
+
+  [Mosquitto](https://mosquitto.org/) is an open source MQTT broker suitable for heavy production use
+
+- Commercial MQTT brokers
+
+  [HiveMQ](https://www.hivemq.com/hivemq/) offer a commercial MQTT broker
+
+  [AWS IOT](https://aws.amazon.com/iot-core/) AWS's IOT core also uses mqtt (There is planned a strategy for aws iot specifically)
+
+
+
+
+
+
+
 
 
 

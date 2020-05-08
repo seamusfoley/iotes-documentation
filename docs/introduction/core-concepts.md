@@ -101,6 +101,10 @@ Strategies set up the connections to the protocol your device is using. They han
 
 You can use an existing strategies or write your own for more tailored handling of device connection. Modifying an existing strategy is a good way to to provide tighter specification for the types of device that can be connected and how they should behave.
 
+You can see avaliable strategies in the sidebar
+
+More information on writing your own strategy is avaliable [here](/docs/advanced/strategies)
+
 ## Plugins
 
 Plugins are wrappers around iotes core which provide binding for the ```dispatch``` and the ```subscribe``` methods to be native form for a specific state management library. For example the react-hooks strategy provide access to a ```useIotesDevice``` and ```useIotesHost``` so you can use iotes connections directly in functional components.
@@ -109,4 +113,8 @@ Plugins are not injected as dependencies as strategies are, but are used instead
 
 ```javascript
 import { createIotesReactHook } from 'iotes-plugins-react-hooks'
-````
+```
+
+You can see avliable strategies in the sidebar
+
+More information on writing your own plugin is avaliable [here](/docs/advanced/strategies)

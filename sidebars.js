@@ -5,9 +5,7 @@ module.exports = {
       "introduction/installation", 
       "introduction/motivation",
       "introduction/core-concepts", 
-      "introduction/strategies", 
-      "introduction/plugins",
-      "introduction/examples"
+      "introduction/examples" 
     ],
     Plugins: [
       "plugins/react-hooks", 
@@ -16,6 +14,10 @@ module.exports = {
     Strategies: [
       "strategies/mqtt", 
       "strategies/phidget22"
+    ],
+    Advanced: [
+      "advanced/plugins",
+      "advanced/strategies",
     ]
   }
 }

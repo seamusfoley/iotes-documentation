@@ -1,26 +1,30 @@
 ---
 id: getting-started
-title: Getting Started with Iotes
-sidebar_label: Getting Started
+title: Quick Start
+sidebar_label: Quick Start
 ---
 
 Iotes is an iot adapter for JavaScript applications.
 
-It helps you write applications that connect to iot services, using a number of protocols, in a predictable way that's consistent with declaritive application frameworks.
+It helps you write applications that connect to iot services, using a number of protocols, in a predictable way that's easy to use with declaritive application frameworks.
 
-You can use iotes core alone, or use it with plugins that provide bindings to popular libraries 
+You can use iotes core alone, or use it with [plugins](/docs/introduction/core-concepts#plugins) that provide bindings to popular libraries 
 
-## Installation
+This quick start is a basic example that uses the [strategy](/docs/introduction/core-concepts#strategies) to connect two devices to the [mosquitto](mosquitto.org) public mqtt broker.
 
-Iotes is available as a package on NPM for use with a module bundler or in a Node application:
+## Quick Start
 
-### NPM
+### 1. Install
+
+#### NPM
 
 ```
 npm install iotes
 ```
 
-### Yarn
+or:
+
+#### Yarn
 
 ```
 yarn add iotes
@@ -28,20 +32,22 @@ yarn add iotes
 
 For more information see the [installation](./installation) page
 
-## Using iotes in your app
-
-This is a basic example that uses the mqttStrategy to connect two devices to the moquitto public mqtt broker.
+### 2. Import packages
 
 ```javascript
 import { createIotes } from 'iotes'
 // This example uses mqtt through the mqtt strategy
 import { mqttStategy } from 'iotes-strategy-mqtt' 
+```
 
+### 3. Define connection topology
+
+```javascript
 // Iotes uses a topology map to declare which devices should be connected
 const topology = {
   client: { 
-    // The name of your application using iotes
-    name: 'appName' 
+    // The name of your client using iotes
+    name: 'clientName' 
   }, 
   hosts: [{
     // A name for you to identify a unique host
@@ -68,12 +74,21 @@ const topology = {
       },
   ],
 }
+```
 
-// Create an Iotes instance 
+### 4. Create an Iotes instance 
 
+```javascript
 // This example connects to mqtt using the basic mqtt strategy
-const iotes = createIotes(topology, mqttStrategy) 
+const iotes = createIotes({
+  topology, 
+  strategy: mqttStrategy
+}) 
+```
 
+### 5. Subscribe and Dispatch
+
+```javascript
 // You can use hostSubscribe() or deviceSubscribe() 
 // to respond to changes on the devices or the host.
 // Normally you'd use a view binding plugin 
@@ -92,6 +107,53 @@ iotes.deviceDispatch({
   }
 })
 
+```
+
+## All Together Now
+  Same example but all together
+
+  ```javascript
+  import { createIotes } from 'iotes'
+  import { mqttStategy } from 'iotes-strategy-mqtt' 
+
+  const topology = {
+  client: { 
+    name: 'clientName' 
+  }, 
+  hosts: [{
+    name: 'exampleHost', 
+    host: 'ws://localhost', 
+    port: '8888', 
+  }], 
+  devices: [
+      {
+        hostName: 'exampleHost',
+        type: 'EXAMPLE_TYPE', 
+        name: 'DEVICE_1', 
+      },
+      {
+        hostName: 'exampleHost',
+        type: 'EXAMPLE_TYPE',
+        name: 'DEVICE_2', 
+      },
+  ],
+}
+
+const iotes = createIotes({
+  topology, 
+  strategy: mqttStrategy
+}) 
+
+iotes.deviceSubscribe(state => console.log(state))
+iotes.hostSubscribe(state => console.log(state))
+
+iotes.deviceDispatch({
+  'DEVICE_1':{  
+    payload:{
+      message: 'new information'
+    }
+  }
+})
 ```
 
 ## Should You Use Iotes?
