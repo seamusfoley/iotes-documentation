@@ -29,6 +29,8 @@
   --ifm-strong-color: var(--ifm-color-primary);
   --ifm-code-color: var(--ifm-color-primary);
   --logo-color: #e4b800;
+  --ifm-footer-link-color: #e4b800;
+  --ifm-footer-color: #e4b800;
 }
 
 html[data-theme='dark'] {
@@ -59,6 +61,7 @@ html[data-theme='dark'] {
   --ifm-color-emphasis-800: var(--ifm-color-gray-200);
   --ifm-color-emphasis-900: var(--ifm-color-gray-100);
   --ifm-color-emphasis-1000: var(--ifm-color-gray-0);
+  --ifm-footer-link-color: #e4b800;
   --ifm-background-color: #18191a;
   --ifm-background-surface-color: #18191a;
   --ifm-hover-overlay: rgba(255, 255, 255, 0.05);
@@ -66,6 +69,8 @@ html[data-theme='dark'] {
   --ifm-color-content-secondary: rgba(255, 255, 255, 1);
   --ifm-contents-border-color: #606770;
   --ifm-code-background: var(--ifm-color-gray-800);
+  --ifm-footer-link-color: #e4b800;
+  --ifm-footer-color: #e4b800;
 }
 
 strong {
@@ -98,7 +103,25 @@ strong {
   text-decoration: underline;
 }
 
+.footer.footer--dark {
+  color: #e4b800;
+}
 
+.footer.footer--dark a {
+  color: #e4b800;
+}
+
+.footer.footer--dark .footer__link-item {
+  color: #e4b800;
+}
+
+.button.button--secondary {
+  --ifm-button-border-color: var(--ifm-color-gray-200);
+}
+
+.button.button--secondary:not(.button--outline) {
+  --ifm-button-background-color: var(--ifm-color-gray-200);
+}
 .collective {
   stroke: var(--axis-color);
   fill: var(--axis-color);

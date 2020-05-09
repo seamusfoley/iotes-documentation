@@ -15,9 +15,12 @@ module.exports = {
       "strategies/mqtt", 
       "strategies/phidget22"
     ],
+    API: [
+      "api/topology",
+    ],
     Advanced: [
       "advanced/plugins",
       "advanced/strategies",
-    ]
+    ],
   }
 }

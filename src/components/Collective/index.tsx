@@ -220,6 +220,10 @@ export const Collective: React.FC<Props> = (props) => {
           strokeWidth={1}
           strokeOpacity={1.0}
           fillOpacity={0}
+          onTouchStart={(event) => { 
+            showHint.current = false
+            isEditing.current = true
+          }}
         />
         {isEditing.current ? <circle 
           cx={pos.cx + (collective.x * 2.5)} 
@@ -229,14 +233,6 @@ export const Collective: React.FC<Props> = (props) => {
           strokeWidth={2}
           strokeOpacity={0.66}
           fillOpacity={0}
-          onMouseDown={(event) => { 
-            // event.preventDefault()
-            isEditing.current = true 
-          }}
-          onTouchStart={(event) => { 
-            // event.preventDefault()
-            isEditing.current = true 
-          }}
         /> : null}
         <circle
           style={{cursor: 'pointer'}}
@@ -259,7 +255,6 @@ export const Collective: React.FC<Props> = (props) => {
           { showHint.current ? <text 
             x={ pos.cx + collective.x - 30 } 
             y={ pos.cy + collective.y + 40 }
-           
             fill={'#ccc'}
           > 
             Drag Me!

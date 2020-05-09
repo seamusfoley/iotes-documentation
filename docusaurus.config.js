@@ -25,7 +25,7 @@ module.exports = {
         {
           to: 'docs/introduction/what-is-iotes',
           activeBasePath: 'What-is-Iotes', 
-          label: 'What Is Iotes',
+          label: 'What Is Iotes?',
           position: 'right'
         },
         {
@@ -40,14 +40,12 @@ module.exports = {
           label: 'Examples',
           position: 'right'
         },
-        /*
         {
-          to: 'docs/introduction/core-concepts',
-          activeBasePath: 'introduction', 
-          label: 'FAQ',
+          to: 'docs/api/topology',
+          activeBasePath: 'api', 
+          label: 'API',
           position: 'right'
         },
-        */
         {
 
           href: 'https://github.com/seamusfoley/iotes',
@@ -60,24 +58,11 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Links',
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/doc1',
-            },
-            {
-              label: 'Second Doc',
-              to: 'docs/doc2',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Github',
+              to: 'https://github.com/seamusfoley/iotes',
             },
           ],
         },
