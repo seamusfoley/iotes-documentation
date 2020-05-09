@@ -6,11 +6,11 @@ sidebar_label: Quick Start
 
 Iotes is an iot adapter for JavaScript applications.
 
-It helps you write applications that connect to iot services, using a number of protocols, in a predictable way that's easy to use with declaritive application frameworks.
+It helps you write applications that connect to IOT services, using a number of protocols, in a predictable way that's easy to use with declaritive application frameworks.
 
-You can use iotes core alone, or use it with [plugins](/docs/introduction/core-concepts#plugins) that provide bindings to popular libraries 
+You can use Iotes core alone, or use it with [plugins](/docs/introduction/core-concepts#plugins) that provide bindings to popular libraries 
 
-This quick start is a basic example that uses the [mqtt strategy](/docs/strategie/mqtt) to connect two devices to the [mosquitto](mosquitto.org) public mqtt broker.
+This quick start is a basic example that uses the [mqtt strategy](/docs/strategies/mqtt) to connect two devices to the [mosquitto](mosquitto.org) public mqtt broker.
 
 ## Quick Start
 
@@ -160,4 +160,4 @@ iotes.deviceDispatch({
 
 Iotes is currently in alpha and not suitable for use in production, however we are looking for feedback or contributions.
 
-If you're looking for a quick and easy way to hook up a test application to one of the provided connection strategies then iotes should be able to make your life easier.
+If you're looking for a quick and easy way to hook up a test application to one of the provided connection strategies then Iotes should be able to make your life easier.

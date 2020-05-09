@@ -23,7 +23,7 @@ import { createIotes } from
 const {useIotesDevice, useIotesHost} = createIotes({topology, strategy})
 ```
 
-*Refer to the [quick start guide](/docs/introduction/getting-started) if you dont yet know what a topology and strategy is.*
+*Refer to the [quick start guide](/docs/introduction/getting-started) if you dont yet know what a topology and strategy is*
 
 ## 4. Use
 
@@ -32,8 +32,17 @@ const Component = () => {
   const [ hostState, setHostState ] = useState({}) 
   const [ deviceState, setDeviceState ] = useState({})
 
-  useIotesHost((state) => setHostState(state['YourHostName]')) 
-  useIotesDevice((state) => setDeviceState(state['YourDeviceName]'))
+  const [ hostSubscribe, hostDispatch ] = useIotesHost()
+  const [ deviceSubscribe, deviceDispatch ] = useIotesDevice()
+
+  hostSubscribe((state) => setHostState([...hostState, state.COLLECTIVE])) 
+  deviceSubscribe((state) => setDeviceState([...deviceState, state.COLLECTIVE]))
+
+  const handleDataFrame = (data) => {
+    deviceDispatch(
+      createDeviceDispatchable('COLLECTIVE', 'UPDATE', data)
+    )
+  }
 
   return (
     <p>Host State: {JSON.stringify(hostState)}<p>

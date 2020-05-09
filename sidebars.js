@@ -6,7 +6,7 @@ module.exports = {
       "introduction/motivation",
       "introduction/core-concepts", 
       "introduction/examples",
-      "introduction/what-is-this" 
+      "introduction/what-is-iotes" 
     ],
     Plugins: [
       "plugins/react-hooks",

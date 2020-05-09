@@ -5,7 +5,7 @@ title: MQTT
 
 **The MQTT strategy gives iotes a way connect to and receive or dispatch data to an MQTT broker** 
 
-Mqtt is an accessible maturure and widely used IOT protocol. If you dont know which strategy to use, or you are getting started with IOT use this one.
+Mqtt is an accessible, mature and widely used IOT protocol. If you don't know which strategy to use, or you are getting started with IOT use this one.
 
 
 ## Install
@@ -36,7 +36,7 @@ const iotes = createIotes({
 
 *Edited from [mqtt.org](http://mqtt.org/)*
 
-MQTT works on a publish/subscribe (pub/sub) model. Devices can publish messages to a **topic**, and devices can **subscibe** to a **topic**. When a device publishes a message to a **topic** all devices subscribed to that **topic** receive the message
+MQTT works on a publish/subscribe (pub/sub) model. Devices can publish messages to a **topic**, and devices can **subscribe** to a **topic**. When a device publishes a message to a **topic** all devices subscribed to that **topic** receive the message
 
 All devices connect to a centralised **broker**. The broker receives the messages **published** to a **topic** and distributes the message to all devices **subscribed** to the **topic**
 
@@ -48,11 +48,11 @@ The iotes MQTT strategy uses [MQTT.js](https://github.com/mqttjs/MQTT.js) for mq
 
 - ```name``` : Your name for the broker you want to connect to. This can be anything you want and is not related to broker settings
 
-- ```host``` : The address of the broker you wish to connect to. You **must** prefix this with the protcol which you wish to use. Generally from a browser this will be ```ws://``` or ```wss://``` as the browser will be able to use MQTT over websockets.
+- ```host``` : The address of the broker you wish to connect to. You **must** prefix this with the protocol which you wish to use. Generally from a browser this will be ```ws://``` or ```wss://``` as the browser will be able to use MQTT over websockets.
 
 - ```port``` : The port on the host that the broker uses. According to mqtt documentation this should be ```8883``` for mqtt over websockets but in practice is often some port in the ```8xxx``` range. Check you broker documentation to find out
 
-- ```strategyConfig```: *Optional* : You can use this to pass config information to mqtt.js. You can see the avliable options [here](https://github.com/mqttjs/MQTT.js#mqttclientstreambuilder-options)
+- ```strategyConfig```: *Optional* : You can use this to pass config information to mqtt.js. You can see the avaliable options [here](https://github.com/mqttjs/MQTT.js#mqttclientstreambuilder-options)
 
 #### Example:
 

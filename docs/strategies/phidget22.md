@@ -9,7 +9,7 @@ Phidget is a brand for USB Sensing and Control devices. They can be be seen as a
 
 
 :::caution Phidget Device Support
-At the moment we are only supporting Rotary Encoders and RFID readers with the phidget strategy. This is because that is the only hardware we've had around to play with. Adding new devices is relitavley easy, so if you have a physical phidget device you would like supported and wouldn't mind being a test case git in touch!  
+At the moment we are only supporting Rotary Encoders and RFID readers with the phidget strategy. This is because that is the only hardware we've had around to play with. Adding new devices is relatively easy, so if you have a physical phidget device you would like supported and wouldn't mind being a test case get in touch!  
 :::
 
 ## Install
@@ -38,20 +38,20 @@ const iotes = createIotes({
 
 Phidgets are both physical devices and a protocol designed to make usb sensors and controllers easy and quick to use. They can be used for education, exhibitions and prototyping.
 
-In most languages phidget supports the phidget API directly communicates with a usb driver, in JavaScript however the apps send and receives messages from the app to a network server, which does the usb communication with the physical devices. Fortunatley the network server is pretty easy to set up either locally or on you local newtowork following this [documentation](https://www.phidgets.com/docs/Phidget_Network_Server#Javascript). Once up and running iotes-phidget makes it easy address the devices.
+In most languages phidget supports the phidget API directly communicates with a usb driver, in JavaScript however the apps send and receives messages from the app to a network server, which does the usb communication with the physical devices. Fortunatley the network server is pretty easy to set up either locally or on you local network following this [documentation](https://www.phidgets.com/docs/Phidget_Network_Server#Javascript). Once up and running iotes-phidget makes it easy address the devices.
 
-Alternativley the phidget SBC (single board computer) is avaliable which acts an the network server and provides plug point to devices using Phidgets propietry VINT plugs       
+Alternatively the Phidget SBC (Single Board Computer) is available which acts an the network server and provides plug point to devices using Phidgets proprietary VINT plugs       
 
 
 ## Iotes Phidget Topology
 
-The iotes Phidget strategy uses [Phidget.js](https://github.com/mqttjs/Phidget.js) for Phidget connection
+The Iotes Phidget strategy uses [Phidget.js](https://github.com/mqttjs/Phidget.js) for Phidget connection
 
 ### Hosts
 
 - ```name``` : Your name for the broker you want to connect to. This can be anything you want and is not related to broker settings
 
-- ```host``` : The address of the broker you wish to connect to. You **must** prefix this with the protcol which you wish to use. Generally from a browser this will be ```ws://``` or ```wss://``` as the browser will be able to use Phidget over websockets.
+- ```host``` : The address of the broker you wish to connect to. You **must** prefix this with the protocol which you wish to use. Generally from a browser this will be ```ws://``` or ```wss://``` as the browser will be able to use Phidget over websockets.
 
 - ```port``` : The port on the host that the broker uses. According to Phidget documentation this should be ```8883``` for Phidget over websockets but in practice is often some port in the ```8xxx``` range. Check you broker documentation to find out
 
