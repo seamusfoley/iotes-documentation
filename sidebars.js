@@ -1,12 +1,12 @@
 module.exports = {
   docs: {
     Introduction: [
+      "introduction/what-is-iotes",
       "introduction/getting-started", 
       "introduction/installation", 
-      "introduction/motivation",
       "introduction/core-concepts", 
       "introduction/examples",
-      "introduction/what-is-iotes" 
+      "introduction/motivation",
     ],
     Plugins: [
       "plugins/react-hooks",

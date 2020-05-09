@@ -161,3 +161,5 @@ iotes.deviceDispatch({
 Iotes is currently in alpha and not suitable for use in production, however we are looking for feedback or contributions.
 
 If you're looking for a quick and easy way to hook up a test application to one of the provided connection strategies then Iotes should be able to make your life easier.
+
+If your still wondering what Iotes is 

@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   title: 'Iotes',
   tagline: 'An IOT adaptor for JavaScript',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://iotes.dev',
   baseUrl: '/',
   favicon: 'img/iotes-favicon.png',
   organizationName: 'seamusfoley', // Usually your GitHub org/user name.
@@ -23,6 +23,12 @@ module.exports = {
       },
       links: [
         {
+          to: 'docs/introduction/what-is-iotes',
+          activeBasePath: 'What-is-Iotes', 
+          label: 'What Is Iotes',
+          position: 'right'
+        },
+        {
           to: 'docs/introduction/getting-started', 
           activeBasePath: 'introduction', 
           label: 'Quick Start',
@@ -34,18 +40,14 @@ module.exports = {
           label: 'Examples',
           position: 'right'
         },
-        /*{
-          to: 'docs/introduction/examples', 
-          activeBasePath: 'introduction',
-          label: 'API',
-          position: 'right'
-        },
+        /*
         {
           to: 'docs/introduction/core-concepts',
           activeBasePath: 'introduction', 
           label: 'FAQ',
           position: 'right'
-        },*/
+        },
+        */
         {
 
           href: 'https://github.com/seamusfoley/iotes',

@@ -13,9 +13,10 @@ Physical devices could be anything from environmental sensors that report on air
 
 The devices don't necessarily have to be physical. The 'device' could be a button on an app and or a website, like it is in our [mqtt example](docs/introduction/example).
 
-Which means IOT could be just about be anything...
+Which means IOT could be just about be anything which connects to the internet...
 
 ![Whatever](https://media1.giphy.com/media/3o6nUNDHrGyYKslfH2/giphy.gif?cid=ecf05e471b24d9f726f3e0cf74274a319caeec95cb55463e&rid=giphy.gif)
+
 
 ## Is IOT useful for you?
 
@@ -52,6 +53,14 @@ Then you might be better off with another realtime focused approach
 ## How does Iotes help?
 
 Iotes takes a lot of the boilerplate work out of interacting with IOT client libraries, turning them from  chain of promises or callbacks *(i.e. Connect ***then*** Create a Device, ***then*** Set Up Event listeners, ***then*** handle Errors)* into a Host and Device stream that make IOT simple to integrate, particularly with declarative UI libraries like React. You can spend less time researching and trying different protocols and more time developing solutions. 
+
+
+## What is Iotes not?
+
+Iotes is not for building hardware or robotics devices. There are JavaScript Libraries for that.
+
+[Johnny Five](http://johnny-five.io)
+[Cylon](https://cylonjs.com)
 
 
 ## See it action.
