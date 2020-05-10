@@ -6,7 +6,7 @@ module.exports = {
       "introduction/installation", 
       "introduction/core-concepts", 
       "introduction/examples",
-      "introduction/motivation",
+      // "introduction/motivation",
     ],
     Plugins: [
       "plugins/react-hooks",
