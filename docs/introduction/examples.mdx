@@ -7,7 +7,7 @@ import { Example } from '../../src/pages/example'
 
 ## Basic MQTT
 
-In this example the the graph maps the x and y movement of the collective control. The collective position are is via Iotes over a public mqtt broker and received by the graph, which subscribes via Iotes
+In this example the graph maps the x and y movement of the collective control. The collective position is dispatched via Iotes over a public mqtt broker and received by the graph, which in turn subscribes via Iotes
 
 ### Example
 
@@ -16,7 +16,7 @@ In this example the the graph maps the x and y movement of the collective contro
 ### Code
 
 This code is written with React using Iotes core for the purpose of a demonstration. The Iotes-React plugin provides 
-simpler access to Iotes for use in React and is recommended for use is [react projects](/docs/plugins/react-hooks)
+simpler access to Iotes in React and is recommended for use in [react projects](/docs/plugins/react-hooks)
 
 
 ```jsx
@@ -49,10 +49,10 @@ export const Example = () => {
   const [hostData, setHostData] = useState([])  
   const [deviceData, setDeviceData] = useState([])
 
-  // Reference to the iotes instance
+  // Ref to the iotes instance
   const iotes = useRef(null)
 
-  // References to track susription state
+  // Refs to track subscription state
   const isDeviceSubscribed = useRef(false)
   const isHostSubscribed = useRef(flase)
 

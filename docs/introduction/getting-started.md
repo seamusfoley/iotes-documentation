@@ -4,9 +4,7 @@ title: Quick Start
 sidebar_label: Quick Start
 ---
 
-Iotes is an iot adapter for JavaScript applications.
-
-It helps you write applications that connect to IOT services, using a number of protocols, in a predictable way that's easy to use with declaritive application frameworks.
+Iotes is an iot adapter for JavaScript applications. It helps you write applications that use one of a number of protocols to connect to IOT devices. It makes it easy to connect in a predictable fashiion that's works well with declarative application frameworks.
 
 You can use Iotes core alone, or use it with [plugins](/docs/introduction/core-concepts#plugins) that provide bindings to popular libraries 
 
@@ -158,8 +156,8 @@ iotes.deviceDispatch({
 
 ## Should You Use Iotes?
 
-Iotes is currently in alpha and not suitable for use in production, however we are looking for feedback or contributions.
+Iotes is currently in alpha and not suitable for use in production. However, we are looking for feedback or contributions.
 
 If you're looking for a quick and easy way to hook up a test application to one of the provided connection strategies then Iotes should be able to make your life easier.
 
-If your still wondering what Iotes is 
+If you're still wondering what Iotes is then [start here](/docs/introduction/what-is-iotes)

@@ -13,7 +13,7 @@ Physical devices could be anything from environmental sensors that report on air
 
 The devices don't necessarily have to be physical. The 'device' could be a button on an app and or a website, like it is in our [mqtt example](docs/introduction/example).
 
-Which means IOT could be just about be anything which connects to the internet...
+Which means IOT could be just about anything which connects to the internet...
 
 ![Whatever](https://media1.giphy.com/media/3o6nUNDHrGyYKslfH2/giphy.gif?cid=ecf05e471b24d9f726f3e0cf74274a319caeec95cb55463e&rid=giphy.gif)
 
@@ -23,13 +23,13 @@ Which means IOT could be just about be anything which connects to the internet..
 Rather than asking 'Do I need IOT?' it can be more helpful to ask what characteristics do you want in your connections:
 
 - **&#9989**  Do you want devices to be able to 'push' messages to each other or your application?
-- **&#9989**  Is the likely period between the messages between 100 milliseconds and a few hours?
+- **&#9989**  Is the likely period of the messages between 100 milliseconds and a few hours?
 - **&#9989**  Is 'some' latency acceptable? **
 - **&#9989**  Can the messages be serialized as a string?
 
 If the answer to all these is **YES** then IOT may be for you.
 
-** *We have used these protocols for things like physical button controls for a screen and the latency has been unnoticeable. IOT protocols generally aren't designed specifically for very low latency though*
+** *We have used these protocols for things like physical button controls for a screen and the latency has been unnoticeable. However IOT protocols generally aren't designed specifically for very low latency*
 
 #### However
 
@@ -47,7 +47,7 @@ Then you might be better off with another realtime focused approach
 
 - Power consumption
 
-  Sometimes your devices will want to be battery powered and or connected over a low bandwidth network. Because of this IOT protocols are often designed to use as little power and data as possible.
+  Sometimes your devices will want to be battery powered and/or connected over a low bandwidth network. Because of this, IOT protocols are often designed to use as little power and data as possible.
 
 
 ## How does Iotes help?
@@ -63,7 +63,7 @@ Iotes is not for building hardware or robotics devices. There are JavaScript Lib
 [Cylon](https://cylonjs.com)
 
 
-## See it action.
+## See it in action.
 
-Check out the [examples]('/docs/introduction/examples) page to get a feel for how iotes works page or just [get started]('/docs/introduction/getting-started')
+Check out the [examples]('/docs/introduction/examples) page to get a feel for how Iotes works, or just [get started]('/docs/introduction/getting-started')
 

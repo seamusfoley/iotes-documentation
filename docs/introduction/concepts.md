@@ -5,10 +5,10 @@ title: Core Concepts
 
 ## Iotes
 
-The ```createIotes``` method takes two arguements, a topology map and a strategy
+The ```createIotes``` method takes two arguments, a topology map and a strategy
 
 The topology map tells the strategy how to connect.
-The strategy handles all the asyncronous connection details for the protocol (including auto reconnection if required, the device creation and device set up.
+The strategy handles all the asyncronous connection details for the protocol (including auto reconnection if required), the device creation and device set up.
 
 ## Iotes Core
 
@@ -30,16 +30,16 @@ This library has been inspried heavily by [redux](redux.js.org) (in fact an earl
 
 ## Topology Map
 
-The topology map is an object used to declare the desired state of connectivity. You can connect to multiple hosts and multiple devices to those hosts. The topology map is passed to the strategy which handles the set up of the devices. At the moment it is only possible to declare the topology at Iotes creation but maybe possible to declare updates to topology in the future. 
+The topology map is an object used to declare the desired state of connectivity. You can connect to multiple hosts and multiple devices to those hosts. The topology map is passed to the strategy which handles the set up of the devices. At the moment it is only possible to declare the topology at Iotes creation but it may be possible to declare updates to topology in the future. 
 
-The topology map has a client object and and a hosts, and devices 'collection' (array of objects)
 
 ```javascript
 import { createIotes } from 'iotes'
 // This example uses mqtt through the mqtt strategy
 import { mqttStategy } from 'iotes-strategy-mqtt' 
 
-// Iotes uses a topology map to declare which devices should be connected
+// Iotes uses a topology map to declare which 
+// devices should be connected
 const topology = {
   client: { 
     // The name of your application using iotes
@@ -57,8 +57,9 @@ const topology = {
       {
         // The host which the device whould be connected to
         hostName: 'exampleHost',
-        // One of the device types supported by a given strategy. 
-        // See Strategy docs for avaliable types.
+        // One of the device types supported by a 
+        // given strategy. See Strategy docs for 
+        // avaliable types.
         type: 'EXAMPLE_TYPE', 
         // The unique name for this device
         name: 'DEVICE_1', 
@@ -97,9 +98,9 @@ The methods are optional and create a suggested form for the dispatchables for t
 
 ## Strategies
 
-Strategies set up the connections to the protocol your device is using. They handle all the asyncronous connections information and dispatch events through iotes core back to your application. 
+Strategies set up the connections to the protocol your device is using. They handle all the asyncronous connection information and dispatch events through iotes core back to your application. 
 
-You can use an existing strategies or write your own for more tailored handling of device connection. Modifying an existing strategy is a good way to to provide tighter specification for the types of device that can be connected and how they should behave.
+You can use an existing strategy or write your own for more tailored handling of device connection. Modifying an existing strategy is a good way to provide tighter specification for the types of device that can be connected and how they should behave.
 
 You can see avaliable strategies in the sidebar
 
