@@ -17,7 +17,7 @@ This quick start is a basic example that uses the [mqtt strategy](/docs/strategi
 #### NPM
 
 ```
-npm install iotes
+npm install @iotes/core
 ```
 
 or:

@@ -5,7 +5,7 @@ title: Installation
 To install the stable version:
 
 ```
-npm install iotes
+npm install @iotes/core
 ```
 
 This assumes you are using npm as your package manager.

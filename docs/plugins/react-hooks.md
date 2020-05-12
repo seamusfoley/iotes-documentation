@@ -8,7 +8,7 @@ This plugin simplifies use of Iotes in functional components with (react hooks)[
 ## 1. Install
 
 ```bash
-npm install iotes-react-hooks
+npm install @iotes/react-hooks
 ```
 
 ## 2. Import

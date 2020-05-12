@@ -31,6 +31,7 @@
   --logo-color: #e4b800;
   --ifm-footer-link-color: #e4b800;
   --ifm-footer-color: #e4b800;
+  --github-logo-src: url('/img/GitHub-Mark-64px.png')
 }
 
 html[data-theme='dark'] {
@@ -71,10 +72,22 @@ html[data-theme='dark'] {
   --ifm-code-background: var(--ifm-color-gray-800);
   --ifm-footer-link-color: #e4b800;
   --ifm-footer-color: #e4b800;
+  --github-logo-src: url('/img/GitHub-Mark-Light-64px.png')
+}
+
+a {
+  cursor: pointer !important;
 }
 
 strong {
   color: var(--ifm-strong-color);
+}
+
+.githublink .img {
+  background-image: var(--github-logo-src);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 'none'
 }
 
 .navbar strong  {
