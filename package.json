@@ -1,5 +1,5 @@
 {
-  "name": "iotes-documentation-v-2",
+  "name": "iotes-documentation",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,8 @@
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.54",
     "@docusaurus/preset-classic": "^2.0.0-alpha.54",
+    "@iotes/core": "^0.1.35",
+    "@iotes/strategy-mqtt": "0.0.18",
     "@vx/axis": "0.0.195",
     "@vx/curve": "0.0.195",
     "@vx/event": "0.0.195",

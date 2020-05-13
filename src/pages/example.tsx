@@ -1,23 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Collective, Graph } from '../components' 
-import { createIotes, TopologyMap, Iotes, createDeviceDispatchable} from 'iotes'
-import { mqttStrategy } from 'iotes-strategy-mqtt'
+import { createIotes, TopologyMap, Iotes, createDeviceDispatchable} from '@iotes/core'
+import { mqttStrategy } from '@iotes/strategy-mqtt'
 
 const topology: TopologyMap<{}, any> = {
-  hosts: [{ name: 'testapp/0', host: 'ws://test.mosquitto.org', port: '8080' }],
-  client: {name: 'example'},
+  hosts: [{
+    name: 'testapp/0',
+    host: 'ws://test.mosquitto.org', 
+    port: '8080' 
+  }],
+  client: {
+    name: 'example'
+  },
   devices: [
     {
-        hostName: 'testapp/0',
-        type: 'APP_CHANNEL',
-        name: 'READER/1',
-        channel: 1,
+      hostName: 'testapp/0',
+      type: 'APP_CHANNEL',
+      name: 'READER/1',
+      channel: 1,
     },
     {
-        hostName: 'testapp/0',
-        type: 'EXTERNAL_CHANNEL',
-        name: 'ENCODER/1',
-        channel: 2,
+      hostName: 'testapp/0',
+      type: 'EXTERNAL_CHANNEL',
+      name: 'ENCODER/1',
+      channel: 2,
     },
   ],
 }
