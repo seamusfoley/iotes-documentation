@@ -31,7 +31,9 @@
   --logo-color: #e4b800;
   --ifm-footer-link-color: #e4b800;
   --ifm-footer-color: #e4b800;
-  --github-logo-src: url('/img/GitHub-Mark-64px.png')
+  --github-logo-src: url('/img/GitHub-Mark-64px.png');
+  --ifm-color-success: #3AA935;
+  --ifm-color-warning: #e4b800;
 }
 
 html[data-theme='dark'] {

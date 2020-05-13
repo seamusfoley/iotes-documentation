@@ -10,6 +10,7 @@ module.exports = {
   projectName: 'iotes', // Usually your repo name.
   plugins: [path.resolve(__dirname, 'src/plugins/mqttjs')],
   themeConfig: {
+    defaultDarkMode: true,
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/vsDark'),
@@ -61,7 +62,7 @@ module.exports = {
           title: 'Links',
           items: [
             {
-              label: 'Github',
+              label: 'GitHub',
               to: 'https://github.com/seamusfoley/iotes',
             },
           ],

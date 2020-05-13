@@ -19,8 +19,8 @@ module.exports = {
       "api/topology",
     ],
     Advanced: [
-      "advanced/plugins",
       "advanced/strategies",
+      "advanced/plugins",
     ],
   }
 }

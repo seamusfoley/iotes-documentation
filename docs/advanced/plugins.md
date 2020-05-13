@@ -1,6 +1,7 @@
 ---
 id: plugins
-title: Making Plugins
+title: Creating Custom Plugins
+sidebar_label: Creating Plugins
 ---
 
 ## Coming Soon

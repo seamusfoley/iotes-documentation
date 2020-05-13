@@ -3,7 +3,11 @@ id: react-hooks
 title: React Hooks
 ---
 
-This plugin simplifies use of Iotes in functional components with (react hooks)[https://reactjs.org/docs/hooks-intro.html]
+:::danger Does Not Exist Yet. 
+We're working on it!  
+:::
+
+This plugin simplifies use of Iotes in functional components with [react hooks](https://reactjs.org/docs/hooks-intro.html)
 
 ## 1. Install
 

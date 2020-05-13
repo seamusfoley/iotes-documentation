@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
+import Mdx from '@theme/MDXComponents';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -85,6 +86,11 @@ function Home() {
               to={useBaseUrl('docs/introduction/getting-started')}>
               Get Started
             </Link>
+          </div>
+          <div style={{margin: '1.5em 0' }}>
+            <img src='https://img.shields.io/npm/v/@iotes/core' style={{ margin: '0 0.5em' }}/>
+            <img src='https://img.shields.io/npm/l/@iotes/core' style={{ margin: '0 0.5em' }}/>
+            <img src='https://img.shields.io/github/workflow/status/iotes/core/release/master' style={{ margin: '0 0.5em' }}/>
           </div>
         </div>
       </header>
