@@ -3,10 +3,6 @@ id: react-hooks
 title: React Hooks
 ---
 
-:::danger Does Not Exist Yet. 
-We're working on it!  
-:::
-
 This plugin simplifies use of Iotes in functional components with [react hooks](https://reactjs.org/docs/hooks-intro.html)
 
 ## 1. Install
@@ -18,7 +14,7 @@ npm install @iotes/react-hooks
 ## 2. Import
 
 ```javascript
-import { createIotes } from
+import { createIotes } from '@iotes/react-hooks'
 ```
 
 ## 3. Create
