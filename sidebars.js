@@ -6,6 +6,8 @@ module.exports = {
       "introduction/installation", 
       "introduction/core-concepts", 
       "introduction/examples",
+      "introduction/lifecycle-hooks",
+      "introduction/lifecycle-middleware",
       // "introduction/motivation",
     ],
     Plugins: [
