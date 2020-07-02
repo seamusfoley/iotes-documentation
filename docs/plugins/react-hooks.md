@@ -74,7 +74,6 @@ const Component = () => {
     )
   }
 
-
   useEffect(() => {
     setInterval(
       () => handleDataFrame({value: Date.now()})
