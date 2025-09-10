@@ -10,7 +10,7 @@
     "serve": "serve ./build"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.54",
+    "@docusaurus/core": "^2.4.3",
     "@docusaurus/preset-classic": "^2.0.0-alpha.54",
     "@iotes/core": "^0.1.35",
     "@iotes/strategy-mqtt": "0.0.18",
